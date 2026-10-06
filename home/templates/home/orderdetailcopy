@@ -1,0 +1,1031 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order Details - Foodie</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <style>
+
+        body {
+            background: #f8f9fa;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .navbar-brand {
+            font-size: 25px;
+            font-weight: 700;
+            color: #ffc107 !important;
+        }
+
+        .nav-link {
+            color: #222 !important;
+            font-weight: 500;
+            margin-left: 10px;
+        }
+
+        .nav-link:hover {
+            color: #ffc107 !important;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .page-header {
+            background: linear-gradient(
+                135deg,
+                #ffc107,
+                #ffca2c
+            );
+
+            padding: 40px 20px;
+
+            text-align: center;
+
+            border-radius: 0 0 25px 25px;
+        }
+
+        .page-header h1 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+
+        /* =========================
+           CARDS
+        ========================= */
+
+        .card-box {
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 22px;
+
+            margin-bottom: 20px;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .card-title {
+            font-size: 20px;
+
+            font-weight: 700;
+
+            margin-bottom: 18px;
+        }
+
+
+        /* =========================
+           ORDER INFO
+        ========================= */
+
+        .order-id {
+            font-size: 22px;
+
+            font-weight: 700;
+        }
+
+        .order-date {
+            color: #777;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-block;
+
+            padding: 8px 15px;
+
+            border-radius: 20px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .confirmed {
+            background: #cff4fc;
+            color: #055160;
+        }
+
+        .preparing {
+            background: #e2d9f3;
+            color: #432874;
+        }
+
+        .out-delivery {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .delivered {
+            background: #d1e7dd;
+            color: #0f5132;
+        }
+
+        .cancelled {
+            background: #f8d7da;
+            color: #842029;
+        }
+
+
+        /* =========================
+           TRACKING
+        ========================= */
+
+        .tracking {
+            display: flex;
+
+            justify-content: space-between;
+
+            position: relative;
+
+            margin-top: 30px;
+
+            margin-bottom: 20px;
+        }
+
+        .tracking::before {
+            content: "";
+
+            position: absolute;
+
+            top: 15px;
+
+            left: 8%;
+
+            right: 8%;
+
+            height: 4px;
+
+            background: #ddd;
+
+            z-index: 0;
+        }
+
+        .tracking-step {
+            position: relative;
+
+            z-index: 1;
+
+            text-align: center;
+
+            width: 20%;
+        }
+
+        .tracking-circle {
+            width: 32px;
+
+            height: 32px;
+
+            border-radius: 50%;
+
+            background: #ddd;
+
+            margin: auto;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 700;
+
+            color: white;
+        }
+
+        .tracking-step.active
+        .tracking-circle {
+
+            background: #ffc107;
+
+            color: #000;
+        }
+
+        .tracking-step.cancelled-step
+        .tracking-circle {
+
+            background: #dc3545;
+
+            color: white;
+        }
+
+        .tracking-label {
+            font-size: 12px;
+
+            margin-top: 8px;
+
+            font-weight: 600;
+        }
+
+
+        /* =========================
+           FOOD ITEMS
+        ========================= */
+
+        .food-row {
+            border-bottom: 1px solid #eee;
+
+            padding: 15px 0;
+        }
+
+        .food-row:last-child {
+            border-bottom: none;
+        }
+
+        .food-name {
+            font-weight: 600;
+        }
+
+        .food-price {
+            color: #777;
+
+            font-size: 14px;
+        }
+
+        .food-total {
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .summary-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 12px;
+        }
+
+        .grand-total {
+            font-size: 22px;
+
+            font-weight: 700;
+        }
+
+
+        /* =========================
+           CANCEL BUTTON
+        ========================= */
+
+        .cancel-btn {
+            background: #dc3545;
+
+            color: white;
+
+            border: none;
+
+            padding: 11px 20px;
+
+            border-radius: 9px;
+
+            font-weight: 600;
+        }
+
+        .cancel-btn:hover {
+            background: #bb2d3b;
+        }
+
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-btn {
+            background: #ffc107;
+
+            color: #000;
+
+            text-decoration: none;
+
+            padding: 10px 20px;
+
+            border-radius: 9px;
+
+            font-weight: 600;
+
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background: #e0a800;
+
+            color: #000;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 768px) {
+
+            .tracking-label {
+                font-size: 9px;
+            }
+
+            .tracking-circle {
+                width: 28px;
+                height: 28px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
+
+<nav class="navbar navbar-expand-lg">
+
+    <div class="container">
+
+        <a class="navbar-brand"
+           href="{% url 'home' %}">
+
+            🍔 Foodie
+
+        </a>
+
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+
+        <div
+            class="collapse navbar-collapse"
+            id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{% url 'home' %}">
+
+                        Home
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{% url 'about' %}">
+
+                        About
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{% url 'contact' %}">
+
+                        Contact
+
+                    </a>
+
+                </li>
+
+
+                <li class="nav-item">
+
+                    <a class="nav-link"
+                       href="{% url 'cart' %}">
+
+                        🛒 Cart
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<section class="page-header">
+
+    <h1>📦 Order Details</h1>
+
+    <p class="mb-0">
+
+        Track your order and view order information
+
+    </p>
+
+</section>
+
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div class="container py-5">
+
+
+    <!-- =================================================
+         ORDER INFORMATION
+    ================================================== -->
+
+    <div class="card-box">
+
+        <div class="row align-items-center">
+
+            <div class="col-md-6">
+
+                <div class="order-id">
+
+                    Order #{{ order.id }}
+
+                </div>
+
+                <div class="order-date">
+
+                    Placed on
+                    {{ order.created_at|date:"d M Y, h:i A" }}
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-6 text-md-end mt-3 mt-md-0">
+
+                {% if order.status == "Pending" %}
+
+                    <span class="status pending">
+                        Pending
+                    </span>
+
+                {% elif order.status == "Confirmed" %}
+
+                    <span class="status confirmed">
+                        Confirmed
+                    </span>
+
+                {% elif order.status == "Preparing" %}
+
+                    <span class="status preparing">
+                        Preparing
+                    </span>
+
+                {% elif order.status == "Out for Delivery" %}
+
+                    <span class="status out-delivery">
+                        Out for Delivery
+                    </span>
+
+                {% elif order.status == "Delivered" %}
+
+                    <span class="status delivered">
+                        Delivered
+                    </span>
+
+                {% elif order.status == "Cancelled" %}
+
+                    <span class="status cancelled">
+                        Cancelled
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ORDER TRACKING
+    ================================================== -->
+
+    <div class="card-box">
+
+        <div class="card-title">
+
+            Track Your Order
+
+        </div>
+
+
+        {% if order.status == "Cancelled" %}
+
+            <div class="text-center py-3">
+
+                <span class="status cancelled">
+
+                    ❌ Order Cancelled
+
+                </span>
+
+            </div>
+
+        {% else %}
+
+            <div class="tracking">
+
+
+                <!-- PENDING -->
+
+                <div class="tracking-step
+                    {% if order.status == 'Pending' or order.status == 'Confirmed' or order.status == 'Preparing' or order.status == 'Out for Delivery' or order.status == 'Delivered' %}
+                    active
+                    {% endif %}">
+
+                    <div class="tracking-circle">
+
+                        ✓
+
+                    </div>
+
+                    <div class="tracking-label">
+
+                        Placed
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRMED -->
+
+                <div class="tracking-step
+                    {% if order.status == 'Confirmed' or order.status == 'Preparing' or order.status == 'Out for Delivery' or order.status == 'Delivered' %}
+                    active
+                    {% endif %}">
+
+                    <div class="tracking-circle">
+
+                        ✓
+
+                    </div>
+
+                    <div class="tracking-label">
+
+                        Confirmed
+
+                    </div>
+
+                </div>
+
+
+                <!-- PREPARING -->
+
+                <div class="tracking-step
+                    {% if order.status == 'Preparing' or order.status == 'Out for Delivery' or order.status == 'Delivered' %}
+                    active
+                    {% endif %}">
+
+                    <div class="tracking-circle">
+
+                        ✓
+
+                    </div>
+
+                    <div class="tracking-label">
+
+                        Preparing
+
+                    </div>
+
+                </div>
+
+
+                <!-- OUT FOR DELIVERY -->
+
+                <div class="tracking-step
+                    {% if order.status == 'Out for Delivery' or order.status == 'Delivered' %}
+                    active
+                    {% endif %}">
+
+                    <div class="tracking-circle">
+
+                        ✓
+
+                    </div>
+
+                    <div class="tracking-label">
+
+                        Out for Delivery
+
+                    </div>
+
+                </div>
+
+
+                <!-- DELIVERED -->
+
+                <div class="tracking-step
+                    {% if order.status == 'Delivered' %}
+                    active
+                    {% endif %}">
+
+                    <div class="tracking-circle">
+
+                        ✓
+
+                    </div>
+
+                    <div class="tracking-label">
+
+                        Delivered
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+
+    <div class="row">
+
+
+        <!-- =================================================
+             LEFT COLUMN
+        ================================================== -->
+
+        <div class="col-lg-8">
+
+
+            <!-- =========================
+                 ORDERED ITEMS
+            ========================= -->
+
+            <div class="card-box">
+
+                <div class="card-title">
+
+                    Ordered Items
+
+                </div>
+
+
+                {% for item in order_items %}
+
+                <div class="food-row">
+
+                    <div class="row align-items-center">
+
+
+                        <div class="col-6">
+
+                            <div class="food-name">
+
+                                {% if item.food %}
+
+                                    {{ item.food.name }}
+
+                                {% else %}
+
+                                    Food Item
+
+                                {% endif %}
+
+                            </div>
+
+                            <div class="food-price">
+
+                                ₹{{ item.price }}
+                                × {{ item.quantity }}
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-6 text-end">
+
+                            <div class="food-total">
+
+                                ₹{{ item.total }}
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+                {% empty %}
+
+                    <p class="text-muted">
+
+                        No items found for this order.
+
+                    </p>
+
+                {% endfor %}
+
+            </div>
+
+
+
+            <!-- =========================
+                 DELIVERY DETAILS
+            ========================= -->
+
+            <div class="card-box">
+
+                <div class="card-title">
+
+                    📍 Delivery Details
+
+                </div>
+
+
+                <p class="mb-2">
+
+                    <strong>Name:</strong>
+
+                    {{ order.customer_name }}
+
+                </p>
+
+
+                <p class="mb-2">
+
+                    <strong>Phone:</strong>
+
+                    {{ order.phone }}
+
+                </p>
+
+
+                <p class="mb-2">
+
+                    <strong>Email:</strong>
+
+                    {{ order.email }}
+
+                </p>
+
+
+                <p class="mb-2">
+
+                    <strong>Address:</strong>
+
+                    {{ order.address }}
+
+                </p>
+
+
+                <p class="mb-0">
+
+                    <strong>City:</strong>
+
+                    {{ order.city }}
+
+                    &nbsp;&nbsp;
+
+                    <strong>PIN:</strong>
+
+                    {{ order.pincode }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             RIGHT COLUMN
+        ================================================== -->
+
+        <div class="col-lg-4">
+
+
+            <!-- =========================
+                 PAYMENT SUMMARY
+            ========================= -->
+
+            <div class="card-box">
+
+                <div class="card-title">
+
+                    Payment Summary
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+
+                        Subtotal
+
+                    </span>
+
+                    <span>
+
+                        ₹{{ order.subtotal }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+
+                        Delivery
+
+                    </span>
+
+                    <span>
+
+                        ₹{{ order.delivery_charge }}
+
+                    </span>
+
+                </div>
+
+
+                <hr>
+
+
+                <div class="summary-row grand-total">
+
+                    <span>
+
+                        Total
+
+                    </span>
+
+                    <span>
+
+                        ₹{{ order.grand_total }}
+
+                    </span>
+
+                </div>
+
+
+                <div class="mt-3">
+
+                    <strong>
+
+                        Payment:
+
+                    </strong>
+
+                    {{ order.get_payment_method_display }}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =========================
+                 CANCEL ORDER
+            ========================= -->
+
+            {% if order.status == "Pending" or order.status == "Confirmed" %}
+
+            <div class="card-box">
+
+                <div class="card-title">
+
+                    Order Actions
+
+                </div>
+
+
+                <form
+                    method="POST"
+                    action="{% url 'cancel_order' order.id %}">
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="cancel-btn w-100"
+                        onclick="return confirm('Are you sure you want to cancel this order?');">
+
+                        Cancel Order
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         BACK BUTTON
+    ================================================== -->
+
+    <div class="mt-2">
+
+        <a
+            href="{% url 'orders' %}"
+            class="back-btn">
+
+            ← Back to My Orders
+
+        </a>
+
+    </div>
+
+
+</div>
+
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+</body>
+
+</html>

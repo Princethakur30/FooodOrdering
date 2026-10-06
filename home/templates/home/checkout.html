@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Checkout | Foodie</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            background: #f5f6f8;
+
+            color: #212529;
+
+        }
+
+
+        /* =====================================================
+           NAVBAR
+        ===================================================== */
+
+        .navbar {
+
+            height: 70px;
+
+            background: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 0 6%;
+
+            box-shadow:
+                0 2px 12px
+                rgba(0,0,0,0.08);
+
+        }
+
+
+        .logo {
+
+            font-size: 25px;
+
+            font-weight: 800;
+
+            color: #111;
+
+            text-decoration: none;
+
+        }
+
+
+        .logo span {
+
+            color: #f5a900;
+
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 28px;
+
+            align-items: center;
+
+        }
+
+
+        .nav-links a {
+
+            text-decoration: none;
+
+            color: #333;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+        }
+
+
+        .nav-links a:hover {
+
+            color: #f5a900;
+
+        }
+
+
+        /* =====================================================
+           PAGE HEADER
+        ===================================================== */
+
+        .page-header {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffc107,
+                    #ffca28
+                );
+
+            padding: 35px 6%;
+
+        }
+
+
+        .page-header h1 {
+
+            margin: 0;
+
+            font-size: 34px;
+
+            font-weight: 800;
+
+        }
+
+
+        .page-header p {
+
+            margin: 8px 0 0;
+
+            color: #4b3b00;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =====================================================
+           MAIN
+        ===================================================== */
+
+        .checkout-container {
+
+            width: 88%;
+
+            max-width: 1250px;
+
+            margin: 35px auto 60px;
+
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.5fr)
+                minmax(320px, 0.8fr);
+
+            gap: 28px;
+
+            align-items: start;
+
+        }
+
+
+        /* =====================================================
+           LEFT SIDE
+        ===================================================== */
+
+        .left-section {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 22px;
+
+        }
+
+
+        /* =====================================================
+           COMMON CARD
+        ===================================================== */
+
+        .card-box {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 28px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.06);
+
+        }
+
+
+        .section-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .heading-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 12px;
+
+            background: #fff3cd;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 21px;
+
+        }
+
+
+        .section-heading h2 {
+
+            margin: 0;
+
+            font-size: 21px;
+
+            font-weight: 800;
+
+        }
+
+
+        .section-heading p {
+
+            margin: 4px 0 0;
+
+            color: #777;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =====================================================
+           FORM GRID
+        ===================================================== */
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+        }
+
+
+        .form-group.full {
+
+            grid-column: 1 / -1;
+
+        }
+
+
+        .form-group label {
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .form-group input,
+        .form-group textarea {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 14px;
+
+            font-family: inherit;
+
+            background: #fafafa;
+
+            transition: 0.2s;
+
+        }
+
+
+        .form-group textarea {
+
+            min-height: 105px;
+
+            resize: vertical;
+
+        }
+
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+
+            border-color: #ffc107;
+
+            background: white;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(255,193,7,0.12);
+
+        }
+
+
+        /* =====================================================
+           PAYMENT CARDS
+        ===================================================== */
+
+        .payment-options {
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+        }
+
+
+        .payment-card {
+
+            border: 2px solid #e5e5e5;
+
+            border-radius: 14px;
+
+            padding: 18px;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+            position: relative;
+
+        }
+
+
+        .payment-card:hover {
+
+            border-color: #ffc107;
+
+            transform: translateY(-2px);
+
+        }
+
+
+        .payment-card input {
+
+            position: absolute;
+
+            opacity: 0;
+
+        }
+
+
+        .payment-card.selected {
+
+            border-color: #ffc107;
+
+            background: #fff9e6;
+
+        }
+
+
+        .payment-icon {
+
+            font-size: 28px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .payment-card strong {
+
+            display: block;
+
+            font-size: 16px;
+
+        }
+
+
+        .payment-card small {
+
+            color: #777;
+
+            display: block;
+
+            margin-top: 5px;
+
+        }
+
+
+        /* =====================================================
+           ONLINE PAYMENT
+        ===================================================== */
+
+        #onlinePaymentBox {
+
+            display: none;
+
+            margin-top: 20px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff9e6,
+                    #fffdf5
+                );
+
+            border: 1px solid #ffd45a;
+
+            padding: 25px;
+
+            text-align: center;
+
+        }
+
+
+        .qr-title {
+
+            font-size: 20px;
+
+            font-weight: 800;
+
+        }
+
+
+        .qr-subtitle {
+
+            color: #777;
+
+            font-size: 13px;
+
+            margin: 7px 0 18px;
+
+        }
+
+
+        .payment-qr {
+
+            width: 210px;
+
+            height: 210px;
+
+            object-fit: contain;
+
+            background: white;
+
+            padding: 10px;
+
+            border-radius: 12px;
+
+            border: 1px solid #ddd;
+
+        }
+
+
+        .amount-pay {
+
+            margin-top: 15px;
+
+            font-size: 17px;
+
+        }
+
+
+        .amount-pay strong {
+
+            font-size: 22px;
+
+        }
+
+
+        .paid-btn {
+
+            margin-top: 16px;
+
+            border: none;
+
+            background: #198754;
+
+            color: white;
+
+            padding: 11px 22px;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+        }
+
+
+        .payment-status {
+
+            margin-top: 10px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =====================================================
+           RIGHT SIDE
+        ===================================================== */
+
+        .right-section {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 18px;
+
+        }
+
+
+        /* =====================================================
+           ORDER CARD
+        ===================================================== */
+
+        .order-card {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.06);
+
+        }
+
+
+        .order-title {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .order-title h2 {
+
+            margin: 0;
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+        }
+
+
+        .item-count {
+
+            background: #fff3cd;
+
+            color: #8a6500;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =====================================================
+           FOOD ITEM
+        ===================================================== */
+
+        .order-item {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 14px 0;
+
+            border-bottom: 1px solid #eee;
+
+            gap: 12px;
+
+        }
+
+
+        .food-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .food-icon {
+
+            width: 45px;
+
+            height: 45px;
+
+            border-radius: 10px;
+
+            background: #fff3cd;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 21px;
+
+        }
+
+
+        .food-name {
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+        }
+
+
+        .food-quantity {
+
+            display: block;
+
+            color: #888;
+
+            font-size: 12px;
+
+            margin-top: 3px;
+
+        }
+
+
+        .food-price {
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =====================================================
+           PRICE BREAKDOWN
+        ===================================================== */
+
+        .price-card {
+
+            background: #fff;
+
+            border-radius: 18px;
+
+            padding: 23px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0,0,0,0.06);
+
+        }
+
+
+        .price-card h3 {
+
+            margin: 0 0 18px;
+
+            font-size: 18px;
+
+            font-weight: 800;
+
+        }
+
+
+        .price-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin: 13px 0;
+
+            font-size: 14px;
+
+        }
+
+
+        .price-row span:last-child {
+
+            font-weight: 700;
+
+        }
+
+
+        /* =====================================================
+           GRAND TOTAL
+        ===================================================== */
+
+        .grand-total {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffc107,
+                    #ffca28
+                );
+
+            border-radius: 14px;
+
+            padding: 17px 18px;
+
+            margin-top: 18px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+
+        .grand-total span {
+
+            font-size: 16px;
+
+            font-weight: 800;
+
+        }
+
+
+        .grand-total strong {
+
+            font-size: 22px;
+
+            font-weight: 900;
+
+        }
+
+
+        /* =====================================================
+           PLACE ORDER BUTTON
+        ===================================================== */
+
+        .place-order-btn {
+
+            width: 100%;
+
+            border: none;
+
+            background: #212529;
+
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 11px;
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            margin-top: 18px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .place-order-btn:hover {
+
+            background: #000;
+
+            transform: translateY(-1px);
+
+        }
+
+
+        /* =====================================================
+           SECURITY NOTE
+        ===================================================== */
+
+        .secure-note {
+
+            text-align: center;
+
+            color: #777;
+
+            font-size: 12px;
+
+            margin-top: 12px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .checkout-container {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .navbar {
+
+                padding: 0 4%;
+
+            }
+
+
+            .nav-links {
+
+                display: none;
+
+            }
+
+
+            .checkout-container {
+
+                width: 94%;
+
+                margin-top: 20px;
+
+            }
+
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .form-group.full {
+
+                grid-column: auto;
+
+            }
+
+
+            .payment-options {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .page-header {
+
+                padding: 28px 4%;
+
+            }
+
+
+            .page-header h1 {
+
+                font-size: 28px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     NAVBAR
+====================================================== -->
+
+<nav class="navbar">
+
+    <a
+        href="{% url 'home' %}"
+        class="logo"
+    >
+        🍔 <span>Foodie</span>
+    </a>
+
+
+    <div class="nav-links">
+
+        <a href="{% url 'home' %}">
+            Home
+        </a>
+
+        <a href="{% url 'about' %}">
+            About
+        </a>
+
+        <a href="{% url 'contact' %}">
+            Contact
+        </a>
+
+        <a href="{% url 'cart' %}">
+            🛒 Cart
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =====================================================
+     PAGE HEADER
+====================================================== -->
+
+<section class="page-header">
+
+    <h1>
+        Checkout 🛍️
+    </h1>
+
+    <p>
+        Complete your details and place your order.
+    </p>
+
+</section>
+
+
+
+<!-- =====================================================
+     CHECKOUT CONTAINER
+====================================================== -->
+
+<div class="checkout-container">
+
+
+    <!-- =================================================
+         LEFT SECTION
+    ================================================== -->
+
+    <div class="left-section">
+
+
+        <!-- DELIVERY DETAILS -->
+
+        <div class="card-box">
+
+
+            <div class="section-heading">
+
+                <div class="heading-icon">
+                    📍
+                </div>
+
+                <div>
+
+                    <h2>
+                        Delivery Details
+                    </h2>
+
+                    <p>
+                        Where should we deliver your food?
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form
+                method="POST"
+                action="{% url 'checkout' %}"
+                id="checkoutForm"
+            >
+
+                {% csrf_token %}
+
+
+                <div class="form-grid">
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="customer_name"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            placeholder="Enter phone number"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- ADDRESS -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            Delivery Address
+                        </label>
+
+                        <textarea
+                            name="address"
+                            placeholder="House number, street, area..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- CITY -->
+
+                    <div class="form-group">
+
+                        <label>
+                            City
+                        </label>
+
+                        <input
+                            type="text"
+                            name="city"
+                            placeholder="Enter city"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PINCODE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Pincode
+                        </label>
+
+                        <input
+                            type="text"
+                            name="pincode"
+                            placeholder="Enter pincode"
+                            maxlength="10"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     PAYMENT
+                ================================================== -->
+
+                <div
+                    class="section-heading"
+                    style="margin-top:32px;"
+                >
+
+                    <div class="heading-icon">
+                        💳
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Payment Method
+                        </h2>
+
+                        <p>
+                            Choose how you want to pay.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="payment-options">
+
+
+                    <!-- COD -->
+
+                    <label
+                        class="payment-card selected"
+                        id="codCard"
+                    >
+
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="COD"
+                            checked
+                            onchange="showPayment('COD')"
+                        >
+
+                        <div class="payment-icon">
+                            💵
+                        </div>
+
+                        <strong>
+                            Cash on Delivery
+                        </strong>
+
+                        <small>
+                            Pay when your food arrives.
+                        </small>
+
+                    </label>
+
+
+                    <!-- ONLINE -->
+
+                    <label
+                        class="payment-card"
+                        id="onlineCard"
+                    >
+
+                        <input
+                            type="radio"
+                            name="payment_method"
+                            value="ONLINE"
+                            onchange="showPayment('ONLINE')"
+                        >
+
+                        <div class="payment-icon">
+                            📱
+                        </div>
+
+                        <strong>
+                            Online Payment
+                        </strong>
+
+                        <small>
+                            Pay using UPI / QR.
+                        </small>
+
+                    </label>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     QR PAYMENT
+                ================================================== -->
+
+                <div id="onlinePaymentBox">
+
+
+                    <div class="qr-title">
+                        Scan & Pay 📱
+                    </div>
+
+
+                    <div class="qr-subtitle">
+
+                        Scan the QR code using your UPI app.
+
+                    </div>
+
+
+                    <img
+                        src="/media/payment/dummy_payment_qr.jpg"
+                        alt="Payment QR"
+                        class="payment-qr"
+                    >
+
+
+                    <div class="amount-pay">
+
+                        Amount to Pay:
+
+                        <strong>
+                            ₹{{ grand_total }}
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="paid-btn"
+                        onclick="paymentDone()"
+                    >
+
+                        ✓ I Have Paid
+
+                    </button>
+
+
+                    <div
+                        id="paymentStatus"
+                        class="payment-status"
+                    ></div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     PLACE ORDER
+                ================================================== -->
+
+                <button
+                    type="submit"
+                    class="place-order-btn"
+                >
+
+                    Place Order &nbsp; →
+                    
+                </button>
+
+
+                <div class="secure-note">
+
+                    🔒 Your information is safe and secure.
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         RIGHT SECTION
+    ================================================== -->
+
+    <div class="right-section">
+
+
+        <!-- =================================================
+             YOUR ORDER
+        ================================================== -->
+
+        <div class="order-card">
+
+
+            <div class="order-title">
+
+                <h2>
+                    Your Order
+                </h2>
+
+
+                <span class="item-count">
+
+                    {{ cart_items|length }} item(s)
+
+                </span>
+
+            </div>
+
+
+            {% for item in cart_items %}
+
+
+            <div class="order-item">
+
+
+                <div class="food-info">
+
+
+                    <div class="food-icon">
+                        🍔
+                    </div>
+
+
+                    <div>
+
+                        <div class="food-name">
+
+                            {{ item.food.name }}
+
+                        </div>
+
+
+                        <span class="food-quantity">
+
+                            Qty: {{ item.quantity }}
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="food-price">
+
+                    ₹{{ item.total }}
+
+                </div>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             PRICE BREAKDOWN
+        ================================================== -->
+
+        <div class="price-card">
+
+
+            <h3>
+                Price Details
+            </h3>
+
+
+            <!-- SUBTOTAL -->
+
+            <div class="price-row">
+
+                <span>
+                    Item Subtotal
+                </span>
+
+                <span>
+                    ₹{{ subtotal }}
+                </span>
+
+            </div>
+
+
+            <!-- DELIVERY -->
+
+            <div class="price-row">
+
+                <span>
+                    Delivery Charges
+                </span>
+
+                <span>
+                    ₹{{ delivery_charge }}
+                </span>
+
+            </div>
+
+
+            <hr>
+
+
+            <!-- GRAND TOTAL -->
+
+            <div class="grand-total">
+
+                <span>
+                    Grand Total
+                </span>
+
+                <strong>
+                    ₹{{ grand_total }}
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+    function showPayment(method) {
+
+
+        const onlineBox =
+            document.getElementById(
+                "onlinePaymentBox"
+            );
+
+
+        const codCard =
+            document.getElementById(
+                "codCard"
+            );
+
+
+        const onlineCard =
+            document.getElementById(
+                "onlineCard"
+            );
+
+
+        if (method === "ONLINE") {
+
+            onlineBox.style.display =
+                "block";
+
+            onlineCard.classList.add(
+                "selected"
+            );
+
+            codCard.classList.remove(
+                "selected"
+            );
+
+        }
+
+        else {
+
+            onlineBox.style.display =
+                "none";
+
+            codCard.classList.add(
+                "selected"
+            );
+
+            onlineCard.classList.remove(
+                "selected"
+            );
+
+        }
+
+    }
+
+
+
+    function paymentDone() {
+
+
+        const status =
+            document.getElementById(
+                "paymentStatus"
+            );
+
+
+        status.innerHTML =
+            "✓ Payment marked as completed.";
+
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

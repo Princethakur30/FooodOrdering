@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Your Cart - Foodie</title>
+
+
+    <!-- ================================
+         BOOTSTRAP
+    ================================= -->
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+
+    <style>
+
+        /* ================================
+           GENERAL PAGE
+        ================================= */
+
+        body {
+
+            background: #f8f9fa;
+
+            font-family: Arial, sans-serif;
+
+            margin: 0;
+
+            padding: 0;
+
+        }
+
+
+        /* ================================
+           NAVBAR
+        ================================= */
+
+        .navbar {
+
+            background: white;
+
+            box-shadow:
+                0 2px 10px
+                rgba(0, 0, 0, 0.08);
+
+        }
+
+
+        .navbar-brand {
+
+            font-size: 24px;
+
+            font-weight: bold;
+
+        }
+
+
+        .navbar a {
+
+            transition: 0.2s ease;
+
+        }
+
+
+        .navbar a:hover {
+
+            color: #ff9800 !important;
+
+        }
+
+
+        /* ================================
+           CART TITLE
+        ================================= */
+
+        .cart-title {
+
+            font-weight: 800;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        /* ================================
+           CART CARD
+        ================================= */
+
+        .cart-card {
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            margin-bottom: 18px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.07);
+
+        }
+
+
+        /* ================================
+           FOOD IMAGE
+        ================================= */
+
+        .food-image {
+
+            width: 110px;
+
+            height: 90px;
+
+            object-fit: cover;
+
+            border-radius: 12px;
+
+        }
+
+
+        /* ================================
+           FOOD NAME
+        ================================= */
+
+        .food-name {
+
+            font-weight: 700;
+
+            font-size: 18px;
+
+        }
+
+
+        /* ================================
+           FOOD PRICE
+        ================================= */
+
+        .price {
+
+            color: #198754;
+
+            font-weight: 700;
+
+        }
+
+
+        /* ================================
+           QUANTITY
+        ================================= */
+
+        .quantity-box {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .quantity-btn {
+
+            width: 32px;
+
+            height: 32px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #ffc107;
+
+            font-weight: bold;
+
+            font-size: 18px;
+
+        }
+
+
+        .quantity-btn:hover {
+
+            background: #e0a800;
+
+        }
+
+
+        .quantity {
+
+            font-weight: 700;
+
+            min-width: 20px;
+
+            text-align: center;
+
+        }
+
+
+        /* ================================
+           REMOVE BUTTON
+        ================================= */
+
+        .remove-btn {
+
+            color: #dc3545;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+        }
+
+
+        .remove-btn:hover {
+
+            text-decoration: underline;
+
+        }
+
+
+        /* ================================
+           ORDER SUMMARY
+        ================================= */
+
+        .summary {
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.07);
+
+            position: sticky;
+
+            top: 20px;
+
+        }
+
+
+        .summary h4 {
+
+            font-weight: 800;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .summary-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        /* ================================
+           GRAND TOTAL
+        ================================= */
+
+        .grand-total {
+
+            font-size: 22px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* ================================
+           CHECKOUT BUTTON
+        ================================= */
+
+        .checkout-btn {
+
+            width: 100%;
+
+            background: #ffc107;
+
+            color: #000;
+
+            border: none;
+
+            padding: 13px;
+
+            border-radius: 8px;
+
+            font-weight: 700;
+
+            margin-top: 15px;
+
+            text-align: center;
+
+            display: block;
+
+            text-decoration: none;
+
+        }
+
+
+        .checkout-btn:hover {
+
+            background: #e0a800;
+
+            color: #000;
+
+        }
+
+
+        /* ================================
+           EMPTY CART
+        ================================= */
+
+        .empty-cart {
+
+            background: white;
+
+            border-radius: 18px;
+
+            padding: 60px 20px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.07);
+
+        }
+
+
+        .empty-cart-icon {
+
+            font-size: 60px;
+
+        }
+
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 768px) {
+
+            .navbar .container {
+
+                flex-direction: column;
+
+                gap: 15px;
+
+            }
+
+
+            .cart-card {
+
+                text-align: center;
+
+            }
+
+
+            .food-image {
+
+                width: 130px;
+
+                height: 100px;
+
+            }
+
+
+            .quantity-box {
+
+                justify-content: center;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     NAVBAR
+================================== -->
+
+<nav class="navbar">
+
+    <div class="container py-3">
+
+        <div
+            class="d-flex
+                   justify-content-between
+                   align-items-center
+                   flex-wrap
+                   gap-3"
+        >
+
+            <!-- LOGO -->
+
+            <a
+                href="{% url 'home' %}"
+                class="text-decoration-none text-dark fw-bold fs-4"
+            >
+
+                🍔 Foodie
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <div
+                class="d-flex
+                       gap-4
+                       align-items-center
+                       flex-wrap"
+            >
+
+                <!-- HOME -->
+
+                <a
+                    href="{% url 'home' %}"
+                    class="text-decoration-none text-dark"
+                >
+
+                    Home
+
+                </a>
+
+
+                <!-- ABOUT -->
+
+                <a
+                    href="{% url 'about' %}"
+                    class="text-decoration-none text-dark"
+                >
+
+                    About
+
+                </a>
+
+
+                <!-- CONTACT -->
+
+                <a
+                    href="{% url 'contact' %}"
+                    class="text-decoration-none text-dark"
+                >
+
+                    Contact Us
+
+                </a>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'orders' %}">
+                     📦 My Orders
+                    </a>
+                </li>
+
+
+                <!-- CART -->
+
+                <a
+                    href="{% url 'cart' %}"
+                    class="text-decoration-none text-dark fw-bold"
+                >
+
+                    🛒 Cart
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =================================
+     CART SECTION
+================================== -->
+
+<div class="container py-5">
+
+
+    <h1 class="cart-title">
+
+        Your Cart 🛒
+
+    </h1>
+
+
+    {% if cart_items %}
+
+
+    <div class="row g-4">
+
+
+        <!-- =================================
+             CART ITEMS
+        ================================== -->
+
+        <div class="col-lg-8">
+
+
+            {% for item in cart_items %}
+
+
+            <div class="cart-card">
+
+
+                <div class="row align-items-center g-3">
+
+
+                    <!-- FOOD IMAGE -->
+
+                    <div class="col-md-2">
+
+                        {% if item.food.image %}
+
+                        <img
+                            src="{{ item.food.image.url }}"
+                            class="food-image"
+                            alt="{{ item.food.name }}"
+                        >
+
+                        {% endif %}
+
+                    </div>
+
+
+                    <!-- FOOD DETAILS -->
+
+                    <div class="col-md-4">
+
+                        <div class="food-name">
+
+                            {{ item.food.name }}
+
+                        </div>
+
+
+                        <div class="text-muted">
+
+                            {{ item.food.category }}
+
+                        </div>
+
+
+                        <div class="price">
+
+                            ₹{{ item.food.price }}
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- QUANTITY -->
+
+                    <div class="col-md-3">
+
+                        <div class="quantity-box">
+
+
+                            <!-- DECREASE -->
+
+                            <a
+                                href="{% url 'remove_from_cart' item.food.id %}"
+                                class="text-decoration-none"
+                            >
+
+                                <button
+                                    type="button"
+                                    class="quantity-btn"
+                                >
+
+                                    −
+
+                                </button>
+
+                            </a>
+
+
+                            <!-- CURRENT QUANTITY -->
+
+                            <span class="quantity">
+
+                                {{ item.quantity }}
+
+                            </span>
+
+
+                            <!-- INCREASE -->
+
+                            <a
+                                href="{% url 'add_to_cart' item.food.id %}"
+                                class="text-decoration-none"
+                            >
+
+                                <button
+                                    type="button"
+                                    class="quantity-btn"
+                                >
+
+                                    +
+
+                                </button>
+
+                            </a>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ITEM TOTAL -->
+
+                    <div class="col-md-2">
+
+                        <strong>
+
+                            ₹{{ item.total }}
+
+                        </strong>
+
+                    </div>
+
+
+                    <!-- REMOVE -->
+
+                    <div class="col-md-1">
+
+                        <a
+                            href="{% url 'remove_from_cart' item.food.id %}"
+                            class="remove-btn"
+                        >
+
+                            Remove
+
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+
+        <!-- =================================
+             ORDER SUMMARY
+        ================================== -->
+
+        <div class="col-lg-4">
+
+
+            <div class="summary">
+
+
+                <h4>
+
+                    Order Summary
+
+                </h4>
+
+
+                <!-- ITEM SUBTOTAL -->
+
+                <div class="summary-row">
+
+                    <span>
+
+                        Item Subtotal
+
+                    </span>
+
+
+                    <span>
+
+                        ₹{{ grand_total }}
+
+                    </span>
+
+                </div>
+
+
+                <!-- DELIVERY CHARGES -->
+
+                <div class="summary-row">
+
+                    <span>
+
+                        Delivery Charges
+
+                    </span>
+
+
+                    <span>
+
+                        ₹{{ total_delivery }}
+
+                    </span>
+
+                </div>
+
+
+                <hr>
+
+
+                <!-- GRAND TOTAL -->
+
+                <div class="summary-row grand-total">
+
+                    <span>
+
+                        Grand Total
+
+                    </span>
+
+
+                    <span>
+
+                        ₹{{ final_total }}
+
+                    </span>
+
+                </div>
+
+
+                <!-- CHECKOUT -->
+
+                <a
+                    href="{% url 'checkout' %}"
+                    class="checkout-btn"
+                >
+
+                    Proceed to Checkout →
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    {% else %}
+
+
+    <!-- =================================
+         EMPTY CART
+    ================================== -->
+
+    <div class="empty-cart">
+
+
+        <div class="empty-cart-icon">
+
+            🛒
+
+        </div>
+
+
+        <h2 class="mt-3">
+
+            Your Cart is Empty
+
+        </h2>
+
+
+        <p class="text-muted">
+
+            Looks like you haven't added anything yet.
+
+        </p>
+
+
+        <a
+            href="{% url 'home' %}"
+            class="btn btn-dark mt-2"
+        >
+
+            Browse Food 🍔
+
+        </a>
+
+
+    </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+</body>
+
+</html>
